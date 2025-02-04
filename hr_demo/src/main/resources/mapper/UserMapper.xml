@@ -1,0 +1,30 @@
+<!-- 注册用户 -->
+<insert id="register" parameterType="com.cg.pojo.dto.RegisterDto">
+    insert into employee(pic, name, password, age, position_id, department_id, phone, email)         
+    values (#{pic}, #{name}, #{password}, #{age}, #{positionId}, #{departmentId}, #{phone}, #{email})
+</insert> 
+
+<!-- 根据员工ID或部门ID查询员工 -->
+<select id="searchEmployees" resultType="com.cg.pojo.vo.QueryVo">
+    SELECT 
+        e.employee_id,
+        e.name,
+        e.age,
+        e.phone,
+        e.email,
+        e.pic,
+        d.department_name,
+        p.position_name
+    FROM 
+        employee e
+        LEFT JOIN department d ON e.department_id = d.department_id
+        LEFT JOIN position p ON e.position_id = p.position_id
+    <where>
+        <if test="employeeId != null">
+            AND e.employee_id = #{employeeId}
+        </if>
+        <if test="departmentId != null">
+            AND e.department_id = #{departmentId}
+        </if>
+    </where>
+</select> 

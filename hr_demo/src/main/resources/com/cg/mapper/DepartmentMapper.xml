@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cg.mapper.DepartmentMapper">
+    <resultMap id="DepartmentResultMap" type="com.cg.pojo.vo.DepartmentQueryVo">
+        <result property="departmentId" column="department_id"/>
+        <result property="departmentName" column="department_name"/>
+    </resultMap>
+    <select id="query" resultMap="DepartmentResultMap">
+        select * from department
+    </select>
+    <select id="queryOne" resultMap="DepartmentResultMap">
+        select d.department_id,department_name from department d left join hr.employee e on d.department_id = e.department_id
+        where employee_id = #{employeeId}
+    </select>
+    <insert id="add">
+        insert into department(department_name) values (#{departmentName})
+    </insert>
+    <delete id="remove">
+        delete from department where department_id = #{departmentId}
+    </delete>
+    <select id="getEmployee" resultType="Integer">
+        select count(*) from employee
+        where department_id = #{departmentId}
+    </select>
+</mapper>

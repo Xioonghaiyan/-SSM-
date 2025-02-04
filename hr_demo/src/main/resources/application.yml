@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/你的数据库名?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 你的密码
+
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+aliyun:
+  oss:
+    endpoint: https://oss-cn-hangzhou.aliyuncs.com
+    access-key-id: csbrgfc
+    access-key-secret: 11111111
+    bucket-name: hr-demo-xhy
+    url-prefix: https://hr-demo-xhy.oss-cn-hangzhou.aliyuncs.com/
+
+jwt:
+  secret: sgfdsopljkhsl;o437632
+  expire-seconds: 86400  # 24小时
+

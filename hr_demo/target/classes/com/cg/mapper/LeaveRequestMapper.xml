@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cg.mapper.LeaveRequestMapper">
+    <select id="query" resultType="com.cg.pojo.vo.LeaveRequestVo">
+        select *
+        from leave_request
+    </select>
+    <select id="queryOne" resultType="com.cg.pojo.vo.LeaveRequestVo">
+        select id, employee_id, department_id, leave_time, leave_days, type, leave_reason, approval_status from leave_request left join hr.leave_type lt on leave_request.type_id = lt.type_id
+        where employee_id = #{employeeId}
+    </select>
+    <select id="querys" resultType="Integer">
+        select department_id from employee where employee_id =#{employeeId}
+    </select>
+    <select id="queryByDepartmentId" resultType="com.cg.pojo.vo.LeaveRequestVo">
+        select id, employee_id, department_id, leave_time, leave_days, type, leave_reason, approval_status from leave_request left join hr.leave_type lt on leave_request.type_id = lt.type_id
+        where department_id = #{departmentId}
+    </select>
+    <insert id="add">
+        insert into leave_request(employee_id, department_id, leave_time, leave_days, type_id, leave_reason, approval_status)
+        values (#{employeeId},#{departmentId},#{leaveTime},#{leaveDays},#{typeId},#{leaveReason},#{approvalStatus})
+    </insert>
+    <update id="update">
+        update leave_request set approval_status = #{approvalStatus} where id = #{id}
+    </update>
+</mapper>
